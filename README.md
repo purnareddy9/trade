@@ -55,6 +55,12 @@ A structured, institutional-grade equity analysis and swing trading operational 
   * **The 3,130 Crore Share Dilution Trap**: Why low EPS and ~0.6% RoA make recovery difficult.
   * **Opportunity Cost Calculation**: Mathematical comparison between waiting for a +37% rally vs. reallocating ₹45,510 into high-probability compounders.
 
+* **[`SECTOR_WISE_TOP_STOCKS_PLAYBOOK.md`](./SECTOR_WISE_TOP_STOCKS_PLAYBOOK.md)**:
+  * **Sector-by-Sector Blue Chip & Growth Playbook**: 2-3 top leaders for every major sector (IT, Banking, Pharma, Infra, Auto, Consumer, Power, Telecom).
+  * **Clear Classification**: Separating Blue-Chip Anchors (TCS, ICICI, L&T) from High-Growth Alpha (Persistent, Trent, M&M, HAL).
+  * **Competitive Moats & Valuations**: Business drivers, P/E ratios, and exact technical accumulation zones (20/50 EMA floors).
+  * **8-10 Stock Portfolio Construction Rule**: How to combine sectors to ensure non-correlated compounding.
+
 * **[`TOP_10_BLUE_CHIP_INVESTMENT_PORTFOLIO.md`](./TOP_10_BLUE_CHIP_INVESTMENT_PORTFOLIO.md)**:
   * **The Dalal Street Elite 10-12 Watchlist**: Curated institutional investment blueprint for steady compounding.
   * **Institutional Filtering Criteria**: RoCE/RoE > 15-25%, zero pledging, structural business moats, and secular tailwinds.
