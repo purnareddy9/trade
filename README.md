@@ -25,6 +25,14 @@ A structured, institutional-grade equity analysis and swing trading operational 
     * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
     * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
 
+* **[`SWING_TRADING_FOUNDATION_COURSE_PART1.md`](./SWING_TRADING_FOUNDATION_COURSE_PART1.md)**:
+  * **Part 1: The Professional Framework**: Foundations of swing trading mechanics.
+  * **The 3 Time Horizons**: Swing Trading (2-20 days) vs. Positional Trading (weeks-months) vs. Buy & Hold Investing (years).
+  * **Instrument Hierarchy**: Cash Equities vs. Futures vs. Options (why beginners must trade cash shares only).
+  * **The 60-30-10 Capital Allocation**: Core wealth base (60%), Positional trend trades (30%), Tactical swing trades (10%).
+  * **Top-Down Market Approach**: Market Index (Nifty 50) -> Sector Relative Strength -> Stock Selection.
+  * **Platform & Hygiene**: Demat separation, Daily (1D) charts, and GTT limit order discipline.
+
 * **[`WALL_STREET_16_YEARS_SWING_TRADING_LESSONS.md`](./WALL_STREET_16_YEARS_SWING_TRADING_LESSONS.md)**:
   * **16 Years of Wall Street Trading Lessons**: Synthesis of the 10 core swing trading lessons from a veteran $100M+ proprietary trader (former Trillium trader).
   * **Direct Portfolio Application**:
