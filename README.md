@@ -114,6 +114,7 @@ trade/
 ---
 
 ### 5. 📁 `visualizers/` — Interactive Tools & Vector Visuals
+* **[`visualizers/order_block_terminal.html`](./visualizers/order_block_terminal.html)**: **Interactive Order Block & Institutional Liquidity Terminal** — Custom-built F&O terminal tracking Bullish Order Blocks (B-OB), VWAP retests, 20/50 EMA dynamic floors, and live 1% rupee risk position sizing.
 * **[`visualizers/candlestick_vector_explorer.html`](./visualizers/candlestick_vector_explorer.html)**: Interactive HTML web application with live visual charts and built-in position sizing calculator.
 * **[`visualizers/vwap_orb_visualizer.html`](./visualizers/vwap_orb_visualizer.html)**: Interactive VWAP + 15m ORB visual breakout simulator.
 * **[`visualizers/candlestick_bounce_patterns.svg`](./visualizers/candlestick_bounce_patterns.svg)**: High-resolution vector diagrams of Bullish Hammer, Bullish Engulfing, Morning Star, and Dead-Cat False Traps.

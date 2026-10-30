@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dalal Street Order Block & Institutional Liquidity Terminal</title>
+  <style>
+    :root {
+      --bg-dark: #0a0e17;
+      --bg-panel: #111827;
+      --bg-card: #1a2234;
+      --bg-hover: #222f46;
+      --border-color: #2a364f;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --green-bull: #10b981;
+      --green-glow: rgba(16, 185, 129, 0.2);
+      --red-bear: #ef4444;
+      --red-glow: rgba(239, 68, 68, 0.2);
+      --accent-blue: #3b82f6;
+      --accent-orange: #f59e0b;
+      --accent-purple: #8b5cf6;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background-color: var(--bg-panel);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .brand-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .header-metrics {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .metric-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .metric-pill .label {
+      color: var(--text-muted);
+    }
+
+    .metric-pill .value {
+      font-weight: 600;
+    }
+
+    .status-badge {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green-bull);
+      box-shadow: 0 0 8px var(--green-bull);
+    }
+
+    /* Main Container */
+    .main-layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Left Sidebar: Scanners & Watchlists */
+    .sidebar {
+      width: 340px;
+      background-color: var(--bg-panel);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      padding: 14px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .search-box {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent-blue);
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .filter-tab {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-tab:hover, .filter-tab.active {
+      background: var(--accent-blue);
+      color: #fff;
+      border-color: var(--accent-blue);
+    }
+
+    .stock-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .stock-item {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(42, 54, 79, 0.4);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.15s;
+    }
+
+    .stock-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .stock-item.active {
+      background: var(--bg-card);
+      border-left: 3px solid var(--green-bull);
+    }
+
+    .stock-info .symbol {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .stock-info .name {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .stock-tag {
+      display: inline-block;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-top: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .tag-bob {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--green-bull);
+      border: 1px solid var(--green-bull);
+    }
+
+    .tag-vwap {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue);
+    }
+
+    .tag-ema {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--accent-orange);
+      border: 1px solid var(--accent-orange);
+    }
+
+    .stock-pricing {
+      text-align: right;
+    }
+
+    .stock-pricing .ltp {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .stock-pricing .change {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .change.positive { color: var(--green-bull); }
+    .change.negative { color: var(--red-bear); }
+
+    /* Center Stage: Chart & Visualizer */
+    .center-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-dark);
+      overflow: hidden;
+    }
+
+    .chart-toolbar {
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .active-symbol-details {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .active-symbol-details .title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .active-symbol-details .price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green-bull);
+    }
+
+    .chart-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .control-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .control-btn:hover, .control-btn.active {
+      background: var(--bg-hover);
+      color: var(--text-main);
+      border-color: var(--accent-blue);
+    }
+
+    .canvas-container {
+      flex: 1;
+      position: relative;
+      background: #0d121d;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Bottom Info & Analysis Strip */
+    .trade-setup-strip {
+      height: 220px;
+      background: var(--bg-panel);
+      border-top: 1px solid var(--border-color);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr;
+      padding: 14px;
+      gap: 16px;
+    }
+
+    .setup-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .setup-card .card-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .setup-levels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .level-item {
+      font-size: 12px;
+    }
+
+    .level-item .lbl {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+    .level-item .val {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* Position Sizing Calculator */
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .calc-input {
+      width: 90px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      padding: 4px 8px;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .calc-result-box {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--green-bull);
+      border-radius: 6px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .calc-result-box .res-qty {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--green-bull);
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: none;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: filter 0.2s;
+    }
+
+    .action-btn:hover {
+      filter: brightness(1.1);
+    }
+
+    /* Modal / Tooltip */
+    .tooltip {
+      position: absolute;
+      background: rgba(17, 24, 39, 0.95);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: var(--text-main);
+      pointer-events: none;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">Ω</div>
+      <div>
+        <div class="brand-title">ORDER-BLOCK TERMINAL</div>
+        <div class="brand-subtitle">Dalal Street Institutional Liquidity & SMC Engine</div>
+      </div>
+    </div>
+
+    <div class="header-metrics">
+      <div class="metric-pill">
+        <span class="status-badge"></span>
+        <span class="label">NIFTY 50:</span>
+        <span class="value" style="color: var(--green-bull);">23,053.40 (+0.42%)</span>
+      </div>
+      <div class="metric-pill">
+        <span class="label">MARKET REGIME:</span>
+        <span class="value" style="color: var(--green-bull);">Stage 2 Markup (Bullish)</span>
+      </div>
+      <div class="metric-pill">
+        <span class="label">ACTIVE PORTFOLIO BASE:</span>
+        <span class="value">₹10,69,554</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <div class="main-layout">
+    
+    <!-- Sidebar: Scanners & High Momentum Stock List -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search F&O stocks (e.g. Persistent, Bsoft)...">
+        <div class="filter-tabs">
+          <div class="filter-tab active" data-filter="all">All (12)</div>
+          <div class="filter-tab" data-filter="bob">Order Blocks (B-OB)</div>
+          <div class="filter-tab" data-filter="it">IT Leaders</div>
+          <div class="filter-tab" data-filter="lowltp">Under ₹500</div>
+          <div class="filter-tab" data-filter="banking">Banking</div>
+        </div>
+      </div>
+
+      <div class="stock-list" id="stockList">
+        <!-- Stock items populated via JavaScript -->
+      </div>
+    </div>
+
+    <!-- Center Stage: Dynamic Canvas Chart & Strategy Engine -->
+    <div class="center-content">
+      
+      <!-- Chart Controls Header -->
+      <div class="chart-toolbar">
+        <div class="active-symbol-details">
+          <div class="title" id="activeSymTitle">PERSISTENT</div>
+          <div class="price" id="activeSymPrice">₹6,048.00 (+2.86%)</div>
+          <span class="stock-tag tag-bob" id="activeSymBadge">B-OB Retest Zone</span>
+        </div>
+
+        <div class="chart-controls">
+          <button class="control-btn active" id="btnTf1D">Daily (1D Swing)</button>
+          <button class="control-btn" id="btnTf15m">15m (Intraday)</button>
+          <div style="width: 1px; height: 18px; background: var(--border-color); margin: 0 4px;"></div>
+          <button class="control-btn active" id="toggleOB">Order Blocks (SMC)</button>
+          <button class="control-btn active" id="toggleVWAP">VWAP</button>
+          <button class="control-btn active" id="toggleEMA">20/50 EMA</button>
+        </div>
+      </div>
+
+      <!-- Canvas Candlestick Chart -->
+      <div class="canvas-container" id="canvasContainer">
+        <canvas id="chartCanvas"></canvas>
+        <div class="tooltip" id="chartTooltip"></div>
+      </div>
+
+      <!-- Bottom Institutional Analysis & Position Sizing Engine -->
+      <div class="trade-setup-strip">
+        
+        <!-- Card 1: Institutional SMC Breakdown -->
+        <div class="setup-card">
+          <div class="card-title">
+            <span>Institutional SMC Footprint</span>
+            <span style="color: var(--green-bull); font-weight: 800;">HIGH PROBABILITY</span>
+          </div>
+          <div style="font-size: 12px; line-height: 1.5; color: #cbd5e1;" id="smcDescription">
+            <strong>Bullish Order Block (B-OB):</strong> Strong institutional demand absorbed at the support base. An impulse candle created a Fair Value Gap (FVG), and price is currently retesting the top of the block.
+          </div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">
+            Volume Status: <span style="color: var(--green-bull); font-weight: 700;" id="rvolStatus">RVOL 2.4x (Heavy Accumulation)</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Trade Execution Levels -->
+        <div class="setup-card">
+          <div class="card-title">
+            <span>Execution Protocol</span>
+            <span id="rrRatio" style="color: var(--accent-blue); font-weight: 700;">R:R = 1:2.4</span>
+          </div>
+          <div class="setup-levels">
+            <div class="level-item">
+              <div class="lbl">ENTRY ZONE</div>
+              <div class="val" style="color: var(--green-bull);" id="entryVal">₹5,980 – ₹6,048</div>
+            </div>
+            <div class="level-item">
+              <div class="lbl">STOP-LOSS (HARD)</div>
+              <div class="val" style="color: var(--red-bear);" id="stopLossVal">₹5,840 (-3.4%)</div>
+            </div>
+            <div class="level-item">
+              <div class="lbl">TARGET 1 (SWING)</div>
+              <div class="val" style="color: var(--accent-blue);" id="target1Val">₹6,350 (+5.0%)</div>
+            </div>
+            <div class="level-item">
+              <div class="lbl">TARGET 2 (EXPANSION)</div>
+              <div class="val" style="color: var(--accent-purple);" id="target2Val">₹6,600 (+9.1%)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Exact Rupee Position Sizing Calculator -->
+        <div class="setup-card">
+          <div class="card-title">
+            <span>1% Capital Risk Position Sizer</span>
+            <span style="color: var(--text-muted); font-size: 10px;">Rule: Capital ₹10.7L</span>
+          </div>
+          <div class="calc-row">
+            <span>Max Rupee Risk:</span>
+            <input type="number" id="riskRupees" class="calc-input" value="3000" step="500">
+          </div>
+          <div class="calc-result-box">
+            <div>
+              <div style="font-size: 10px; color: var(--text-muted);">RECOMMENDED QUANTITY:</div>
+              <div class="res-qty" id="calcQty">14 Shares</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 10px; color: var(--text-muted);">CAPITAL DEPLOYED:</div>
+              <div style="font-size: 14px; font-weight: 700; color: #fff;" id="calcAlloc">₹84,672</div>
+            </div>
+          </div>
+          <button class="action-btn" id="copyGTTBtn" style="margin-top: 8px;">
+            <span>📋 Copy Zerodha GTT Order Parameters</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // --- STOCKS DATABASE (Institutional Data & Order Block Levels) ---
+    const STOCKS = [
+      {
+        sym: "PERSISTENT",
+        name: "Persistent Systems Ltd",
+        sector: "it",
+        ltp: 6048.00,
+        chg: "+2.86%",
+        isPositive: true,
+        tag: "B-OB Retest",
+        tagClass: "tag-bob",
+        rvol: "2.4x",
+        obLow: 5840,
+        obHigh: 5960,
+        sl: 5840,
+        target1: 6350,
+        target2: 6600,
+        smcNote: "Q2 revenue surge (+30.3%) triggered a massive institutional impulse leg breaking structure above ₹5,880. Current pullback into the 20 EMA and top of the order block offers asymmetric 1:2.4 risk-reward.",
+        candles: [
+          { o: 5450, h: 5560, l: 5410, c: 5554, v: 120 },
+          { o: 5560, h: 5680, l: 5520, c: 5650, v: 210 },
+          { o: 5650, h: 5740, l: 5620, c: 5690, v: 180 },
+          { o: 5690, h: 5820, l: 5670, c: 5790, v: 290 },
+          { o: 5790, h: 5880, l: 5750, c: 5840, v: 340 },
+          { o: 5840, h: 5950, l: 5810, c: 5920, v: 450 },
+          { o: 5920, h: 6048, l: 5884, c: 6048, v: 580 }
+        ]
+      },
+      {
+        sym: "BSOFT",
+        name: "Birlasoft Ltd",
+        sector: "it",
+        ltp: 322.70,
+        chg: "+7.57%",
+        isPositive: true,
+        tag: "Demand Zone",
+        tagClass: "tag-bob",
+        rvol: "3.1x",
+        obLow: 298,
+        obHigh: 308,
+        sl: 298,
+        target1: 345,
+        target2: 365,
+        smcNote: "Extreme oversold capitulation into the ₹300 multi-month horizontal demand shelf. Smart money aggressively absorbed panic supply, creating an explosive morning impulse retest.",
+        candles: [
+          { o: 330, h: 332, l: 312, c: 315, v: 250 },
+          { o: 315, h: 318, l: 298, c: 300, v: 680 },
+          { o: 300, h: 324, l: 299, c: 320, v: 520 },
+          { o: 320, h: 335, l: 316, c: 328, v: 410 },
+          { o: 328, h: 342, l: 321, c: 322.7, v: 490 }
+        ]
+      },
+      {
+        sym: "BEL",
+        name: "Bharat Electronics Ltd",
+        sector: "infra",
+        ltp: 370.00,
+        chg: "+1.42%",
+        isPositive: true,
+        tag: "B-OB Retest",
+        tagClass: "tag-bob",
+        rvol: "2.1x",
+        obLow: 355,
+        obHigh: 362,
+        sl: 355,
+        target1: 395,
+        target2: 420,
+        smcNote: "Defence sovereign order momentum. Bullish order block formed at ₹355-₹360; price has broken prior weekly swing high with expanding volume.",
+        candles: [
+          { o: 350, h: 358, l: 348, c: 354, v: 310 },
+          { o: 354, h: 365, l: 352, c: 362, v: 480 },
+          { o: 362, h: 374, l: 360, c: 370, v: 530 }
+        ]
+      },
+      {
+        sym: "ETERNAL",
+        name: "Zomato Ltd (Eternal)",
+        sector: "lowltp",
+        ltp: 342.50,
+        chg: "+1.38%",
+        isPositive: true,
+        tag: "ORB Breakout",
+        tagClass: "tag-vwap",
+        rvol: "2.6x",
+        obLow: 322,
+        obHigh: 330,
+        sl: 320,
+        target1: 370,
+        target2: 395,
+        smcNote: "Blinkit quick-commerce market leadership. Clean Stage 2 markup structure holding firmly above the 20-day EMA floor. Trailing stop protects +34% unrealized profits.",
+        candles: [
+          { o: 310, h: 325, l: 308, c: 322, v: 450 },
+          { o: 322, h: 336, l: 318, c: 332, v: 560 },
+          { o: 332, h: 345, l: 328, c: 342.5, v: 610 }
+        ]
+      },
+      {
+        sym: "ICICIBANK",
+        name: "ICICI Bank Ltd",
+        sector: "banking",
+        ltp: 1398.00,
+        chg: "+0.85%",
+        isPositive: true,
+        tag: "50 EMA Floor",
+        tagClass: "tag-ema",
+        rvol: "1.8x",
+        obLow: 1350,
+        obHigh: 1375,
+        sl: 1345,
+        target1: 1460,
+        target2: 1520,
+        smcNote: "Pristine asset quality (Net NPA 0.42%) and 2.3% RoA. Pullback into the 50-day EMA demand shelf creates an institutional low-risk accumulation pivot.",
+        candles: [
+          { o: 1360, h: 1385, l: 1352, c: 1378, v: 220 },
+          { o: 1378, h: 1405, l: 1370, c: 1398, v: 340 }
+        ]
+      },
+      {
+        sym: "SBIN",
+        name: "State Bank of India",
+        sector: "banking",
+        ltp: 815.00,
+        chg: "+1.12%",
+        isPositive: true,
+        tag: "B-OB Retest",
+        tagClass: "tag-bob",
+        rvol: "2.2x",
+        obLow: 785,
+        obHigh: 798,
+        sl: 785,
+        target1: 865,
+        target2: 910,
+        smcNote: "Corporate credit demand driver with deep valuation discount (P/E ~10.5x). Weekly consolidation shelf is defending the ₹790 order block.",
+        candles: [
+          { o: 780, h: 798, l: 775, c: 792, v: 310 },
+          { o: 792, h: 820, l: 788, c: 815, v: 490 }
+        ]
+      },
+      {
+        sym: "M&M",
+        name: "Mahindra & Mahindra",
+        sector: "auto",
+        ltp: 2860.00,
+        chg: "+1.78%",
+        isPositive: true,
+        tag: "Breakout",
+        tagClass: "tag-bob",
+        rvol: "2.7x",
+        obLow: 2750,
+        obHigh: 2810,
+        sl: 2750,
+        target1: 3050,
+        target2: 3200,
+        smcNote: "Thar Roxx and XUV700 waiting lists confirm secular auto outperformance. A tight flag breakout above ₹2,820 with strong volume.",
+        candles: [
+          { o: 2720, h: 2810, l: 2700, c: 2790, v: 380 },
+          { o: 2790, h: 2875, l: 2780, c: 2860, v: 520 }
+        ]
+      },
+      {
+        sym: "BHARTIARTL",
+        name: "Bharti Airtel Ltd",
+        sector: "telecom",
+        ltp: 1972.00,
+        chg: "+0.92%",
+        isPositive: true,
+        tag: "HOD Retest",
+        tagClass: "tag-vwap",
+        rvol: "1.9x",
+        obLow: 1895,
+        obHigh: 1930,
+        sl: 1895,
+        target1: 2100,
+        target2: 2220,
+        smcNote: "Telecom pricing power and ARPU expansion past ₹220. Consolidating tight right at the multi-week breakout shelf (₹1,965–₹1,975).",
+        candles: [
+          { o: 1910, h: 1955, l: 1900, c: 1945, v: 280 },
+          { o: 1945, h: 1980, l: 1935, c: 1972, v: 410 }
+        ]
+      },
+      {
+        sym: "TATAPOWER",
+        name: "Tata Power Co Ltd",
+        sector: "lowltp",
+        ltp: 410.00,
+        chg: "+1.54%",
+        isPositive: true,
+        tag: "20 EMA Bounce",
+        tagClass: "tag-ema",
+        rvol: "2.0x",
+        obLow: 388,
+        obHigh: 398,
+        sl: 388,
+        target1: 445,
+        target2: 475,
+        smcNote: "Clean energy and nationwide EV charging grid growth. Rebounded cleanly from its rising 20 EMA with bullish volume confirmation.",
+        candles: [
+          { o: 388, h: 402, l: 385, c: 398, v: 340 },
+          { o: 398, h: 415, l: 395, c: 410, v: 490 }
+        ]
+      },
+      {
+        sym: "TRENT",
+        name: "Trent Ltd",
+        sector: "retail",
+        ltp: 3025.00,
+        chg: "+2.24%",
+        isPositive: true,
+        tag: "Momentum",
+        tagClass: "tag-bob",
+        rvol: "3.0x",
+        obLow: 2850,
+        obHigh: 2940,
+        sl: 2850,
+        target1: 3300,
+        target2: 3550,
+        smcNote: "Fast-fashion Zudio expansion producing ~30% RoCE and 40%+ revenue growth. Bullish order block defends the ₹2,900 level.",
+        candles: [
+          { o: 2880, h: 2980, l: 2860, c: 2950, v: 420 },
+          { o: 2950, h: 3050, l: 2930, c: 3025, v: 610 }
+        ]
+      },
+      {
+        sym: "NATIONALUM",
+        name: "National Aluminium (NALCO)",
+        sector: "lowltp",
+        ltp: 315.00,
+        chg: "+2.88%",
+        isPositive: true,
+        tag: "Commodity Beta",
+        tagClass: "tag-bob",
+        rvol: "3.4x",
+        obLow: 295,
+        obHigh: 304,
+        sl: 295,
+        target1: 345,
+        target2: 370,
+        smcNote: "Global commodity impulse breakout. High-beta F&O mover under ₹500 with zero circuit locks.",
+        candles: [
+          { o: 295, h: 308, l: 292, c: 304, v: 620 },
+          { o: 304, h: 322, l: 302, c: 315, v: 780 }
+        ]
+      },
+      {
+        sym: "LT",
+        name: "Larsen & Toubro Ltd",
+        sector: "infra",
+        ltp: 3845.00,
+        chg: "+1.18%",
+        isPositive: true,
+        tag: "50 EMA Floor",
+        tagClass: "tag-ema",
+        rvol: "1.7x",
+        obLow: 3720,
+        obHigh: 3780,
+        sl: 3720,
+        target1: 4100,
+        target2: 4350,
+        smcNote: "Mega ₹5 Lakh Crore order backlog. Steady institutional accumulation along the 50-day EMA support.",
+        candles: [
+          { o: 3740, h: 3810, l: 3720, c: 3790, v: 290 },
+          { o: 3790, h: 3870, l: 3770, c: 3845, v: 420 }
+        ]
+      }
+    ];
+
+    let currentStock = STOCKS[0];
+    let showOB = true;
+    let showVWAP = true;
+    let showEMA = true;
+    let currentFilter = "all";
+
+    // --- DOM Elements ---
+    const stockListEl = document.getElementById("stockList");
+    const searchInput = document.getElementById("searchInput");
+    const filterTabs = document.querySelectorAll(".filter-tab");
+    const activeSymTitle = document.getElementById("activeSymTitle");
+    const activeSymPrice = document.getElementById("activeSymPrice");
+    const activeSymBadge = document.getElementById("activeSymBadge");
+    const smcDescription = document.getElementById("smcDescription");
+    const rvolStatus = document.getElementById("rvolStatus");
+    const entryVal = document.getElementById("entryVal");
+    const stopLossVal = document.getElementById("stopLossVal");
+    const target1Val = document.getElementById("target1Val");
+    const target2Val = document.getElementById("target2Val");
+    const rrRatio = document.getElementById("rrRatio");
+    const riskInput = document.getElementById("riskRupees");
+    const calcQty = document.getElementById("calcQty");
+    const calcAlloc = document.getElementById("calcAlloc");
+    const copyGTTBtn = document.getElementById("copyGTTBtn");
+
+    const canvas = document.getElementById("chartCanvas");
+    const ctx = canvas.getContext("2d");
+    const tooltip = document.getElementById("chartTooltip");
+
+    // --- Render Stock List ---
+    function renderStockList() {
+      stockListEl.innerHTML = "";
+      const search = searchInput.value.toLowerCase();
+
+      const filtered = STOCKS.filter(s => {
+        const matchesSearch = s.sym.toLowerCase().includes(search) || s.name.toLowerCase().includes(search);
+        if (!matchesSearch) return false;
+        if (currentFilter === "all") return true;
+        if (currentFilter === "bob") return s.tag.includes("B-OB") || s.tag.includes("Demand");
+        if (currentFilter === "it") return s.sector === "it";
+        if (currentFilter === "lowltp") return s.sector === "lowltp" || s.ltp < 500;
+        if (currentFilter === "banking") return s.sector === "banking";
+        return true;
+      });
+
+      filtered.forEach(s => {
+        const item = document.createElement("div");
+        item.className = `stock-item ${s.sym === currentStock.sym ? 'active' : ''}`;
+        item.innerHTML = `
+          <div class="stock-info">
+            <div class="symbol">${s.sym}</div>
+            <div class="name">${s.name}</div>
+            <span class="stock-tag ${s.tagClass}">${s.tag}</span>
+          </div>
+          <div class="stock-pricing">
+            <div class="ltp">₹${s.ltp.toFixed(2)}</div>
+            <div class="change ${s.isPositive ? 'positive' : 'negative'}">${s.chg}</div>
+          </div>
+        `;
+        item.addEventListener("click", () => selectStock(s));
+        stockListEl.appendChild(item);
+      });
+    }
+
+    function selectStock(s) {
+      currentStock = s;
+      activeSymTitle.textContent = s.sym;
+      activeSymPrice.textContent = `₹${s.ltp.toFixed(2)} (${s.chg})`;
+      activeSymBadge.textContent = s.tag;
+      activeSymBadge.className = `stock-tag ${s.tagClass}`;
+      smcDescription.innerHTML = `<strong>Order Block Footprint:</strong> ${s.smcNote}`;
+      rvolStatus.textContent = `RVOL ${s.rvol} (Institutional Flow)`;
+
+      entryVal.textContent = `₹${s.obHigh} – ₹${s.ltp.toFixed(0)}`;
+      stopLossVal.textContent = `₹${s.sl} (-${(((s.ltp - s.sl)/s.ltp)*100).toFixed(1)}%)`;
+      target1Val.textContent = `₹${s.target1} (+${(((s.target1 - s.ltp)/s.ltp)*100).toFixed(1)}%)`;
+      target2Val.textContent = `₹${s.target2} (+${(((s.target2 - s.ltp)/s.ltp)*100).toFixed(1)}%)`;
+      
+      const riskPerShare = s.ltp - s.sl;
+      const rewardPerShare = s.target1 - s.ltp;
+      const rr = (rewardPerShare / riskPerShare).toFixed(1);
+      rrRatio.textContent = `R:R = 1:${rr}`;
+
+      updatePositionSize();
+      renderStockList();
+      drawChart();
+    }
+
+    // --- Position Sizing Calculator ---
+    function updatePositionSize() {
+      const maxRisk = parseFloat(riskInput.value) || 3000;
+      const riskPerShare = Math.max(1, currentStock.ltp - currentStock.sl);
+      const qty = Math.max(1, Math.floor(maxRisk / riskPerShare));
+      const totalCapital = qty * currentStock.ltp;
+
+      calcQty.textContent = `${qty} Shares`;
+      calcAlloc.textContent = `₹${totalCapital.toLocaleString("en-IN")}`;
+    }
+
+    riskInput.addEventListener("input", updatePositionSize);
+
+    // --- Copy GTT Parameters ---
+    copyGTTBtn.addEventListener("click", () => {
+      const qty = Math.max(1, Math.floor((parseFloat(riskInput.value) || 3000) / (currentStock.ltp - currentStock.sl)));
+      const text = `Zerodha GTT Order:\nStock: ${currentStock.sym}\nTrigger Type: Single / OCO\nBuy / Entry: ₹${currentStock.ltp.toFixed(2)}\nStop-Loss Trigger: ₹${currentStock.sl.toFixed(2)}\nTarget 1 Trigger: ₹${currentStock.target1.toFixed(2)}\nQty: ${qty} shares`;
+      navigator.clipboard.writeText(text).then(() => {
+        copyGTTBtn.innerHTML = `<span>✅ Copied to Clipboard!</span>`;
+        setTimeout(() => {
+          copyGTTBtn.innerHTML = `<span>📋 Copy Zerodha GTT Order Parameters</span>`;
+        }, 2000);
+      });
+    });
+
+    // --- Filter Buttons ---
+    filterTabs.forEach(t => {
+      t.addEventListener("click", () => {
+        filterTabs.forEach(tab => tab.classList.remove("active"));
+        t.classList.add("active");
+        currentFilter = t.getAttribute("data-filter");
+        renderStockList();
+      });
+    });
+
+    searchInput.addEventListener("input", renderStockList);
+
+    // --- Canvas Candlestick & Order Block Renderer ---
+    function resizeCanvas() {
+      const container = document.getElementById("canvasContainer");
+      canvas.width = container.clientWidth * window.devicePixelRatio;
+      canvas.height = container.clientHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      drawChart();
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+
+    function drawChart() {
+      const w = canvas.width / window.devicePixelRatio;
+      const h = canvas.height / window.devicePixelRatio;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Background Grid
+      ctx.strokeStyle = "rgba(42, 54, 79, 0.4)";
+      ctx.lineWidth = 1;
+      for (let x = 60; x < w - 60; x += 80) {
+        ctx.beginPath();
+        ctx.moveTo(x, 20);
+        ctx.lineTo(x, h - 40);
+        ctx.stroke();
+      }
+      for (let y = 30; y < h - 40; y += 45) {
+        ctx.beginPath();
+        ctx.moveTo(40, y);
+        ctx.lineTo(w - 40, y);
+        ctx.stroke();
+      }
+
+      const candles = currentStock.candles;
+      const count = candles.length;
+      if (count === 0) return;
+
+      // Calculate Min & Max Price
+      let minP = Math.min(...candles.map(c => c.l), currentStock.obLow * 0.98);
+      let maxP = Math.max(...candles.map(c => c.h), currentStock.target1 * 1.02);
+      const rangeP = maxP - minP;
+
+      const chartTop = 30;
+      const chartBottom = h - 50;
+      const chartHeight = chartBottom - chartTop;
+
+      function getY(p) {
+        return chartBottom - ((p - minP) / rangeP) * chartHeight;
+      }
+
+      const paddingLeft = 80;
+      const paddingRight = 100;
+      const candleAreaWidth = w - paddingLeft - paddingRight;
+      const candleWidth = Math.min(32, (candleAreaWidth / count) * 0.6);
+      const gap = candleAreaWidth / count;
+
+      // 1. Draw Order Block Zone (Green Box)
+      if (showOB) {
+        const obY1 = getY(currentStock.obHigh);
+        const obY2 = getY(currentStock.obLow);
+        const obH = Math.max(12, obY2 - obY1);
+
+        ctx.fillStyle = "rgba(16, 185, 129, 0.15)";
+        ctx.fillRect(paddingLeft - 30, obY1, w - paddingLeft - 30, obH);
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.6)";
+        ctx.setLineDash([4, 4]);
+        ctx.strokeRect(paddingLeft - 30, obY1, w - paddingLeft - 30, obH);
+        ctx.setLineDash([]);
+
+        // Label
+        ctx.fillStyle = "#10b981";
+        ctx.font = "bold 11px sans-serif";
+        ctx.fillText(`[B-OB] Institutional Demand Zone (₹${currentStock.obLow} - ₹${currentStock.obHigh})`, paddingLeft - 20, obY1 - 6);
+      }
+
+      // 2. Draw VWAP Line
+      if (showVWAP) {
+        const vwapVal = currentStock.ltp * 0.988;
+        const vwapY = getY(vwapVal);
+        ctx.strokeStyle = "#3b82f6";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(paddingLeft - 30, vwapY);
+        ctx.lineTo(w - paddingRight, vwapY);
+        ctx.stroke();
+
+        ctx.fillStyle = "#3b82f6";
+        ctx.font = "bold 10px sans-serif";
+        ctx.fillText(`VWAP: ₹${vwapVal.toFixed(1)}`, w - paddingRight + 6, vwapY + 3);
+      }
+
+      // 3. Draw 20 EMA Line
+      if (showEMA) {
+        const emaVal = currentStock.ltp * 0.975;
+        const emaY = getY(emaVal);
+        ctx.strokeStyle = "#f59e0b";
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.moveTo(paddingLeft - 30, emaY);
+        ctx.lineTo(w - paddingRight, emaY);
+        ctx.stroke();
+
+        ctx.fillStyle = "#f59e0b";
+        ctx.font = "bold 10px sans-serif";
+        ctx.fillText(`20 EMA: ₹${emaVal.toFixed(1)}`, w - paddingRight + 6, emaY + 3);
+      }
+
+      // 4. Draw Candlesticks
+      candles.forEach((c, i) => {
+        const x = paddingLeft + i * gap + gap / 2;
+        const oY = getY(c.o);
+        const cY = getY(c.c);
+        const hY = getY(c.h);
+        const lY = getY(c.l);
+
+        const isBull = c.c >= c.o;
+        const color = isBull ? "#10b981" : "#ef4444";
+
+        // Wick
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(x, hY);
+        ctx.lineTo(x, lY);
+        ctx.stroke();
+
+        // Body
+        const topY = Math.min(oY, cY);
+        const bodyH = Math.max(3, Math.abs(cY - oY));
+
+        ctx.fillStyle = color;
+        ctx.fillRect(x - candleWidth / 2, topY, candleWidth, bodyH);
+      });
+
+      // Price Axis on Right
+      ctx.fillStyle = "#94a3b8";
+      ctx.font = "10px sans-serif";
+      for (let p = minP; p <= maxP; p += (rangeP / 6)) {
+        const y = getY(p);
+        ctx.fillText(`₹${p.toFixed(0)}`, w - 50, y + 3);
+      }
+    }
+
+    // Toggle Buttons
+    document.getElementById("toggleOB").addEventListener("click", function() {
+      showOB = !showOB;
+      this.classList.toggle("active", showOB);
+      drawChart();
+    });
+
+    document.getElementById("toggleVWAP").addEventListener("click", function() {
+      showVWAP = !showVWAP;
+      this.classList.toggle("active", showVWAP);
+      drawChart();
+    });
+
+    document.getElementById("toggleEMA").addEventListener("click", function() {
+      showEMA = !showEMA;
+      this.classList.toggle("active", showEMA);
+      drawChart();
+    });
+
+    // Initialize
+    setTimeout(() => {
+      resizeCanvas();
+      selectStock(STOCKS[0]);
+    }, 100);
+
+  </script>
+</body>
+</html>
