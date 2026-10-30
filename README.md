@@ -55,6 +55,13 @@ A structured, institutional-grade equity analysis and swing trading operational 
   * **The 3,130 Crore Share Dilution Trap**: Why low EPS and ~0.6% RoA make recovery difficult.
   * **Opportunity Cost Calculation**: Mathematical comparison between waiting for a +37% rally vs. reallocating ₹45,510 into high-probability compounders.
 
+* **[`TOP_10_BLUE_CHIP_INVESTMENT_PORTFOLIO.md`](./TOP_10_BLUE_CHIP_INVESTMENT_PORTFOLIO.md)**:
+  * **The Dalal Street Elite 10-12 Watchlist**: Curated institutional investment blueprint for steady compounding.
+  * **Institutional Filtering Criteria**: RoCE/RoE > 15-25%, zero pledging, structural business moats, and secular tailwinds.
+  * **12 Master Stocks**: `ICICIBANK`, `SBIN`, `PERSISTENT`, `TCS`, `TRENT`, `M&M`, `LT`, `BHARTIARTL`, `SUNPHARMA`, `TITAN`, `TATAPOWER`, and `ETERNAL`.
+  * **Capital Allocation**: How to deploy ₹3.2 Lakhs across 8-10 stocks (~₹32k–₹40k per company) alongside the 60% mutual fund core.
+  * **Staggered Entry Protocol**: 3-tranche dip-buying strategy using 20 and 50-day EMAs.
+
 * **[`MUTUAL_FUNDS_AND_PORTFOLIO_CORE_STRATEGY.md`](./MUTUAL_FUNDS_AND_PORTFOLIO_CORE_STRATEGY.md)**:
   * **Core & Satellite Wealth Engine**: How to allocate your ₹10.7 Lakhs total wealth (65% in top mutual funds, 35% in active swing trades).
   * **Top Recommended Mutual Funds**: Parag Parikh Flexi Cap, Motilal Oswal Midcap, Nippon India Small Cap.
