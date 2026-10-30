@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nifty 200 / F&O and VWAP Setup Guide</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-4">
+
+  <div class="bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-2xl p-6 shadow-xl max-w-5xl mx-auto space-y-6">
+    
+    <!-- Header -->
+    <div class="border-b border-[var(--border)] pb-4">
+      <div class="flex items-center gap-2">
+        <span class="px-2.5 py-0.5 text-xs font-bold rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20">INTRADAY ESSENTIALS</span>
+        <h1 class="text-xl md:text-2xl font-bold tracking-tight">Understanding Nifty 200 / F&O & The 15-Min ORB + VWAP Setup</h1>
+      </div>
+      <p class="text-sm text-[var(--muted-foreground)] mt-1">Why institutional liquidity matters and how to set up the 15-minute Opening Range Breakout with VWAP.</p>
+    </div>
+
+    <!-- Section 1: What is Nifty 200 & F&O List? -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Nifty 200 Card -->
+      <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-base text-[var(--foreground)] flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-blue-500"></span> What is the Nifty 200?
+          </h3>
+          <span class="text-xs bg-blue-500/10 text-blue-400 font-semibold px-2 py-0.5 rounded">Top 200 Companies</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] leading-relaxed">
+          The <strong>Nifty 200</strong> represents India’s top 200 largest and most actively traded companies on the NSE. It captures over <strong>85% of India's total market capitalization</strong>.
+        </p>
+        <div class="bg-[var(--card)] rounded-lg p-3 text-xs space-y-1.5 border border-[var(--border)]">
+          <div class="text-emerald-400 font-semibold">✔ Why it protects intraday traders:</div>
+          <div class="text-[var(--muted-foreground)]">• Millions of shares trade daily (instant fills).</div>
+          <div class="text-[var(--muted-foreground)]">• Tight 5-paise bid/ask spreads (zero slippage).</div>
+          <div class="text-[var(--muted-foreground)]">• Cannot be rigged by small pump-and-dump operators.</div>
+        </div>
+      </div>
+
+      <!-- F&O List Card -->
+      <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="font-bold text-base text-[var(--foreground)] flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span> What is the F&O List?
+          </h3>
+          <span class="text-xs bg-emerald-500/10 text-emerald-400 font-semibold px-2 py-0.5 rounded">~180 Elite Stocks</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] leading-relaxed">
+          <strong>F&O (Futures &amp; Options)</strong> is an elite list of ~180 to 200 stocks approved by SEBI that meet strict liquidity, daily turnover, and institutional participation criteria.
+        </p>
+        <div class="bg-[var(--card)] rounded-lg p-3 text-xs space-y-1.5 border border-[var(--border)]">
+          <div class="text-emerald-400 font-semibold">✔ The #1 Superpower of F&O Stocks:</div>
+          <div class="text-[var(--muted-foreground)]">• <strong>NO LOWER CIRCUIT LOCKOUTS!</strong> F&O stocks do not freeze at 5% lower circuit where you can't sell.</div>
+          <div class="text-[var(--muted-foreground)]">• Institutions (FIIs, DIIs) trade here daily.</div>
+          <div class="text-[var(--muted-foreground)]">• Examples: Reliance, HDFC Bank, ICICI Bank, Birlasoft, Tata Motors.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Visual Chart of the 15-Minute ORB + VWAP Setup -->
+    <div class="bg-[#131722] rounded-xl border border-[#2a2e39] p-5 shadow-inner">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> The 15-Minute Opening Range Breakout (ORB) + VWAP Setup
+          </h3>
+          <p class="text-xs text-[#787B86]">Exact visual anatomy of the 09:15–09:30 candle, the VWAP support floor, and the 09:31 breakout trigger.</p>
+        </div>
+        <span class="text-xs font-mono bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded font-bold">5-MIN / 15-MIN TIMEFRAME</span>
+      </div>
+
+      <!-- Embedded SVG Graphic -->
+      <div class="w-full flex justify-center overflow-x-auto">
+        <svg viewBox="0 0 900 380" class="w-full max-w-4xl h-auto">
+          <!-- Background grid -->
+          <line x1="50" y1="80" x2="850" y2="80" stroke="#1e222d" stroke-width="1"/>
+          <line x1="50" y1="160" x2="850" y2="160" stroke="#1e222d" stroke-width="1"/>
+          <line x1="50" y1="240" x2="850" y2="240" stroke="#1e222d" stroke-width="1"/>
+
+          <!-- VWAP Blue Line -->
+          <path d="M 50 290 Q 200 270 350 250 T 600 210 T 850 170" fill="none" stroke="#2962FF" stroke-width="3.5"/>
+          <text x="60" y="280" fill="#2962FF" font-size="12" font-weight="800">VWAP LINE (Rising Institutional Floor)</text>
+
+          <!-- CANDLE 1: 09:15 - 09:30 AM (Opening Range) -->
+          <line x1="200" y1="130" x2="200" y2="300" stroke="#089981" stroke-width="3"/>
+          <rect x="175" y="160" width="50" height="110" fill="#089981" rx="3"/>
+          <text x="160" y="325" fill="#787B86" font-size="11" font-weight="600">09:15 - 09:30 AM</text>
+          <text x="165" y="340" fill="#787B86" font-size="10">(Opening Candle)</text>
+
+          <!-- 15-Min High Line -->
+          <line x1="200" y1="130" x2="850" y2="130" stroke="#089981" stroke-width="2" stroke-dasharray="4,4"/>
+          <circle cx="200" cy="130" r="5" fill="#089981"/>
+          <rect x="230" y="115" width="160" height="22" rx="4" fill="#089981"/>
+          <text x="240" y="130" fill="#FFFFFF" font-size="11" font-weight="700">15-MIN HIGH (Mark this line!)</text>
+
+          <!-- 15-Min Low Line -->
+          <line x1="200" y1="300" x2="450" y2="300" stroke="#F23645" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <text x="230" y="315" fill="#F23645" font-size="10" font-weight="600">15-MIN LOW</text>
+
+          <!-- CANDLE 2: 09:31 AM Breakout Candle -->
+          <line x1="400" y1="80" x2="400" y2="210" stroke="#089981" stroke-width="3"/>
+          <rect x="375" y="100" width="50" height="95" fill="#089981" rx="3"/>
+          <text x="360" y="325" fill="#089981" font-size="11" font-weight="700">09:30 - 09:45 AM</text>
+          <text x="362" y="340" fill="#089981" font-size="10">(Breakout Candle)</text>
+
+          <!-- Trigger Arrow & Callout -->
+          <circle cx="400" cy="128" r="6" fill="#FFEB3B"/>
+          <line x1="400" y1="128" x2="480" y2="110" stroke="#FFEB3B" stroke-width="2"/>
+          <rect x="480" y="95" width="180" height="30" rx="4" fill="#1e222d" stroke="#FFEB3B" stroke-width="1.5"/>
+          <text x="490" y="112" fill="#FFEB3B" font-size="11" font-weight="800">ENTRY: Slices above High!</text>
+          <text x="490" y="122" fill="#D1D4DC" font-size="9">Price > 15m High + Volume Spike</text>
+
+          <!-- Stop Loss Marker -->
+          <line x1="330" y1="260" x2="460" y2="260" stroke="#F23645" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <circle cx="400" cy="260" r="4" fill="#F23645"/>
+          <text x="410" y="275" fill="#F23645" font-size="10" font-weight="700">STOP LOSS (Below VWAP)</text>
+
+          <!-- Follow Through Expansion -->
+          <line x1="560" y1="45" x2="560" y2="150" stroke="#089981" stroke-width="2.5"/>
+          <rect x="540" y="60" width="40" height="75" fill="#089981" rx="2"/>
+
+          <line x1="680" y1="30" x2="680" y2="120" stroke="#089981" stroke-width="2.5"/>
+          <rect x="660" y="40" width="40" height="65" fill="#089981" rx="2"/>
+
+          <!-- Target Line -->
+          <line x1="400" y1="45" x2="850" y2="45" stroke="#089981" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <text x="730" y="40" fill="#089981" font-size="11" font-weight="700">TARGET: 1:2 R:R (Book 50%)</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Section 3: Exact Step-by-Step Guide: How to Setup VWAP in TradingView & Zerodha -->
+    <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-5 space-y-4">
+      <h3 class="font-bold text-sm text-[var(--foreground)] uppercase tracking-wider flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Exact Setup Guide: Adding VWAP to Your Charts
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        
+        <!-- TradingView Setup -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 space-y-2">
+          <div class="font-bold text-blue-400 text-sm flex items-center gap-1.5">
+            <span>TradingView Setup</span>
+          </div>
+          <ol class="space-y-1.5 text-[var(--muted-foreground)] list-decimal list-inside leading-relaxed">
+            <li>Click <strong>Indicators</strong> (<code>fx</code>) at the top of your screen.</li>
+            <li>Type <strong>VWAP</strong> and select <strong>Volume Weighted Average Price</strong>.</li>
+            <li>Hover over VWAP in the top-left and click the <strong>Gear Icon (Settings ⚙️)</strong>.</li>
+            <li>In <strong>Inputs tab</strong>: Leave <em>Anchor Period</em> as <code>Session</code>.</li>
+            <li>In <strong>Style tab</strong>:
+              <ul class="pl-4 list-disc space-y-0.5 text-[var(--foreground)]">
+                <li>Make the <strong>VWAP line thick and bright blue</strong>.</li>
+                <li><strong>Uncheck</strong> Upper Band 1, 2, 3.</li>
+                <li><strong>Uncheck</strong> Lower Band 1, 2, 3.</li>
+                <li><strong>Uncheck</strong> Bands Fill (removes the shadow).</li>
+              </ul>
+            </li>
+            <li>Click <strong>Ok</strong>. You now have a clean, institutional VWAP line!</li>
+          </ol>
+        </div>
+
+        <!-- Zerodha Kite Setup -->
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 space-y-2">
+          <div class="font-bold text-emerald-400 text-sm flex items-center gap-1.5">
+            <span>Zerodha Kite Setup</span>
+          </div>
+          <ol class="space-y-1.5 text-[var(--muted-foreground)] list-decimal list-inside leading-relaxed">
+            <li>Open any stock chart (e.g. BSOFT, Reliance, Tata Motors).</li>
+            <li>Change the timeframe from 1D to <strong>5 Minute</strong> or <strong>15 Minute</strong>.</li>
+            <li>Click <strong>Studies</strong> (or <strong>fx</strong>) at the top of the Kite chart.</li>
+            <li>Search for <strong>VWAP</strong>. Click on it.</li>
+            <li>Click the <strong>Settings (Gear Icon ⚙️)</strong> on VWAP:
+              <ul class="pl-4 list-disc space-y-0.5 text-[var(--foreground)]">
+                <li>Color: Choose <strong>Blue</strong> or <strong>Yellow</strong>.</li>
+                <li>Width: Set line width to <strong>2 or 3</strong> for visibility.</li>
+              </ul>
+            </li>
+            <li>Click <strong>Done</strong>. VWAP automatically starts calculating at 09:15 AM every day!</li>
+          </ol>
+        </div>
+
+      </div>
+
+      <!-- Golden Rule Banner -->
+      <div class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 text-xs flex items-center gap-3">
+        <span class="text-xl">💡</span>
+        <div>
+          <span class="font-bold text-blue-400">The Golden VWAP Rule for Intraday:</span>
+          <span class="text-[var(--foreground)] ml-1">If the stock price is <strong>ABOVE VWAP</strong>, only look to buy. If the stock price is <strong>BELOW VWAP</strong>, never buy—institutions are net sellers.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
