@@ -25,6 +25,14 @@ A structured, institutional-grade equity analysis and swing trading operational 
     * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
     * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
 
+* **[`EMA_HOLDINGS_AUDIT_WHAT_TO_EXIT.md`](./EMA_HOLDINGS_AUDIT_WHAT_TO_EXIT.md)**:
+  * **21-Stock EMA Audit**: Concrete 20, 50, and 200 EMA numbers for every holding in your portfolio.
+  * **Clear Action Classification**:
+    * 🟢 **The Keepers (DO NOT EXIT)**: `ETERNAL`, `PNB`, `IDFCFIRSTB`, `RELIANCE`, `HDFCBANK`.
+    * 🔴 **Immediate Exits (Salvage ₹1.60L)**: `SUZLON`, `YESBANK`, `MISHTANN`, `ALOKINDS`, `EASEMYTRIP`, `KOHINOOR`.
+    * 🟡 **Bounce Targets (Sell into EMA Resistance)**: `SJVN`, `IRCON`, `BAJAJHFL`, `JIOFIN` (50%), `WIPRO` (50%).
+    * 🟣 **Profit Locks & Declutter**: `IDEA` (+42%), `UJJIVANSFB` (+56%), `NHPC`, `INOXWIND`, `NTPC`.
+
 * **[`EMA_20_50_200_COMPLETE_GUIDE.md`](./EMA_20_50_200_COMPLETE_GUIDE.md)**:
   * **What EMA Is**: Mathematical weighting differences between SMA and EMA.
   * **The 3 Pillars**: 20 EMA (Speedometer), 50 EMA (Compass), and 200 EMA (Border Wall).
