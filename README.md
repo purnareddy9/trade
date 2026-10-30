@@ -55,6 +55,13 @@ A structured, institutional-grade equity analysis and swing trading operational 
   * **The 3,130 Crore Share Dilution Trap**: Why low EPS and ~0.6% RoA make recovery difficult.
   * **Opportunity Cost Calculation**: Mathematical comparison between waiting for a +37% rally vs. reallocating ₹45,510 into high-probability compounders.
 
+* **[`LONGTERM_AND_HIGH_MOMENTUM_STOCKS_PLAYBOOK.md`](./LONGTERM_AND_HIGH_MOMENTUM_STOCKS_PLAYBOOK.md)**:
+  * **Dual-Track Playbook**: 1-Year Core Long-Term Holdings vs. High-Momentum Intraday/Swing Plays.
+  * **1-Year Holdings by Sector**: 10 high-conviction compounders (`ICICIBANK`, `SBIN`, `PERSISTENT`, `M&M`, `LT`, `BEL`, `SUNPHARMA`, `TRENT`, `TATAPOWER`, `BHARTIARTL`) with 1-year targets and fundamental catalysts.
+  * **High-Momentum IT Movers**: `PERSISTENT` (ATR ~₹140), `BSOFT` (Beta 4-8%), `COFORGE` (ATR ~₹180).
+  * **High-Momentum "Low LTP" Stocks (Under ₹500)**: Liquid, circuit-proof F&O stars (`ETERNAL` ~₹342, `BEL` ~₹370, `BSOFT` ~₹323, `NATIONALUM` ~₹315, `TATAPOWER` ~₹410, `FEDERALBNK` ~₹198).
+  * **Intraday & Swing Execution Framework**: 5m/15m chart rules, VWAP confirmation, and 1% risk position sizing.
+
 * **[`SECTOR_WISE_TOP_STOCKS_PLAYBOOK.md`](./SECTOR_WISE_TOP_STOCKS_PLAYBOOK.md)**:
   * **Sector-by-Sector Blue Chip & Growth Playbook**: 2-3 top leaders for every major sector (IT, Banking, Pharma, Infra, Auto, Consumer, Power, Telecom).
   * **Clear Classification**: Separating Blue-Chip Anchors (TCS, ICICI, L&T) from High-Growth Alpha (Persistent, Trent, M&M, HAL).
