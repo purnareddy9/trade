@@ -25,6 +25,12 @@ A structured, institutional-grade equity analysis and swing trading operational 
     * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
     * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
 
+* **[`YES_BANK_DEEP_DIVE_RESEARCH.md`](./YES_BANK_DEEP_DIVE_RESEARCH.md)**:
+  * **Institutional Deep Dive on YESBANK**: Complete fundamental, technical, and legal analysis of your 3,000-share holding.
+  * **The Supreme Court Shock (Oct 15, 2026)**: Why the ₹8,415 Cr AT-1 bond ruling turns reported profit into a potential -₹5,217 Cr net loss.
+  * **The 3,130 Crore Share Dilution Trap**: Why low EPS and ~0.6% RoA make recovery difficult.
+  * **Opportunity Cost Calculation**: Mathematical comparison between waiting for a +37% rally vs. reallocating ₹45,510 into high-probability compounders.
+
 * **[`MUTUAL_FUNDS_AND_PORTFOLIO_CORE_STRATEGY.md`](./MUTUAL_FUNDS_AND_PORTFOLIO_CORE_STRATEGY.md)**:
   * **Core & Satellite Wealth Engine**: How to allocate your ₹10.7 Lakhs total wealth (65% in top mutual funds, 35% in active swing trades).
   * **Top Recommended Mutual Funds**: Parag Parikh Flexi Cap, Motilal Oswal Midcap, Nippon India Small Cap.
