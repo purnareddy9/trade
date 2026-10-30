@@ -25,6 +25,12 @@ A structured, institutional-grade equity analysis and swing trading operational 
     * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
     * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
 
+* **[`PERSISTENT_SWING_AND_INTRADAY_TRADE_PLAN.md`](./PERSISTENT_SWING_AND_INTRADAY_TRADE_PLAN.md)**:
+  * **Persistent Systems Blueprint**: Complete swing and intraday trading plans for `PERSISTENT` (LTP ~₹6,048).
+  * **Q2 Catalyst**: Record revenue of ₹4,663.9 Cr (+30.3% YoY) and $633.5M new deal bookings.
+  * **Swing Setup**: 20 EMA pullback entry (₹5,850–₹5,920), Stop-Loss (₹5,680), Target 1 (₹6,250), Target 2 (₹6,500).
+  * **Intraday Setup**: 15-min ORB + VWAP trigger with 03:15 PM flat exit rule.
+
 * **[`INTRADAY_HIGH_MOMENTUM_TRADING_GUIDE.md`](./INTRADAY_HIGH_MOMENTUM_TRADING_GUIDE.md)**:
   * **Intraday vs. Swing**: Key structural differences (5m/15m timeframes, VWAP, 03:15 PM exit).
   * **The Holy Trinity**: VWAP, 9 & 21 EMA on 5m, and Relative Volume (RVOL ≥ 2.0).
