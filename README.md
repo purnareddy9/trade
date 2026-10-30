@@ -25,6 +25,11 @@ A structured, institutional-grade equity analysis and swing trading operational 
     * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
     * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
 
+* **[`MUTUAL_FUNDS_AND_PORTFOLIO_CORE_STRATEGY.md`](./MUTUAL_FUNDS_AND_PORTFOLIO_CORE_STRATEGY.md)**:
+  * **Core & Satellite Wealth Engine**: How to allocate your ₹10.7 Lakhs total wealth (65% in top mutual funds, 35% in active swing trades).
+  * **Top Recommended Mutual Funds**: Parag Parikh Flexi Cap, Motilal Oswal Midcap, Nippon India Small Cap.
+  * **Restructuring Transition**: Step-by-step capital reallocation from 21 cluttered stocks into hands-off compounding.
+
 * **[`PERSISTENT_SWING_AND_INTRADAY_TRADE_PLAN.md`](./PERSISTENT_SWING_AND_INTRADAY_TRADE_PLAN.md)**:
   * **Persistent Systems Blueprint**: Complete swing and intraday trading plans for `PERSISTENT` (LTP ~₹6,048).
   * **Q2 Catalyst**: Record revenue of ₹4,663.9 Cr (+30.3% YoY) and $633.5M new deal bookings.
