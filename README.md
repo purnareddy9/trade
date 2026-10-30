@@ -99,6 +99,10 @@ trade/
 ---
 
 ### 3. 📁 `research/` — Equity Research & Stock Blueprints
+* **[`research/BROKERAGE_RADAR_ANALYSIS.md`](./research/BROKERAGE_RADAR_ANALYSIS.md)**:
+  * **Forensic Audit of 21 Brokerage High-Upside Picks**: Classifying recommendations into Institutional Compounders, Turnarounds, and Traps.
+  * **Portfolio Direct Hits**: `Eternal` (Target ₹430), `Vodafone Idea` (Target ₹19), `Bharti Airtel` (Target ₹2,732).
+  * **Top Elite Picks to Watch**: `KEI Industries` (Target ₹4,845), `Hindalco` (Target ₹1,100), `Godrej Consumer` (Target ₹1,400).
 * **[`research/PERSISTENT_SWING_AND_INTRADAY_TRADE_PLAN.md`](./research/PERSISTENT_SWING_AND_INTRADAY_TRADE_PLAN.md)**:
   * Actionable swing and intraday trading plans for `PERSISTENT` (LTP ~₹6,048) following blowout Q2 earnings (+30.3% YoY).
 * **[`research/YES_BANK_DEEP_DIVE_RESEARCH.md`](./research/YES_BANK_DEEP_DIVE_RESEARCH.md)**:
