@@ -51,6 +51,11 @@ trade/
 ## 📌 Master File Index & Descriptions
 
 ### 1. 📁 `playbooks/` — Portfolio Allocation & Playbooks
+* **[`playbooks/MONDAY_EXECUTION_TRADE_PLAN.md`](./playbooks/MONDAY_EXECUTION_TRADE_PLAN.md)**:
+  * **Monday Chronological Battle Plan**: Detailed minute-by-minute execution schedule (08:45 AM to 03:30 PM).
+  * **Exact Sell Orders**: 8 toxic penny stocks to market-sell (salvaging ₹87,141), profit booking on `IDEA` and `UJJIVANSFB` (+₹18,532), expanding liquid cash to **~₹7.16 Lakhs**.
+  * **GTT Orders**: Trailing stop-loss triggers on `ETERNAL` (₹320), `PNB` (₹115), and `IDFCFIRSTB` (₹67); bounce sell limits on `SJVN` and `IRCON`.
+  * **Active Trade Triggers**: Concrete entry rules for `PERSISTENT`, `BHARTIARTL`, and `BEL`.
 * **[`playbooks/PORTFOLIO_ANALYSIS_AND_SWING_TRADING_PLAYBOOK.md`](./playbooks/PORTFOLIO_ANALYSIS_AND_SWING_TRADING_PLAYBOOK.md)**:
   * **Master 524-Line Portfolio Audit**: 21-stock classification (`HOLD`, `SELL`, `EXIT PARTIALLY`, `DECLUTTER`).
   * **Tradebook Post-Mortem**: Evaluation of exits (`PERSISTENT`, `BSOFT`, `APTUS`, `IRFC`).
