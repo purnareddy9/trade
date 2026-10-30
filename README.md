@@ -25,6 +25,16 @@ A structured, institutional-grade equity analysis and swing trading operational 
     * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
     * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
 
+* **[`WALL_STREET_16_YEARS_SWING_TRADING_LESSONS.md`](./WALL_STREET_16_YEARS_SWING_TRADING_LESSONS.md)**:
+  * **16 Years of Wall Street Trading Lessons**: Synthesis of the 10 core swing trading lessons from a veteran $100M+ proprietary trader (former Trillium trader).
+  * **Direct Portfolio Application**:
+    * Why oversize positions in JioFin/Wipro caused panic (Lesson 2).
+    * Why technical patterns are fractal across 1m and Daily charts (Lesson 3).
+    * The Qullamaggie long momentum model applied to Persistent and Eternal (Lesson 5).
+    * The fatal opportunity cost of holding dead capital in Yes Bank, SJVN, and Suzlon (Lesson 7).
+    * Overnight tail risk in microcaps like Mishtann and Alok Inds (Lesson 9).
+    * Reclaiming psychological peace and lifestyle freedom through swing trading (Lessons 8 & 10).
+
 * **[`SETL_STOCK_DEEP_DIVE_RESEARCH.md`](./SETL_STOCK_DEEP_DIVE_RESEARCH.md)**:
   * **Standard Engineering Technology (`SETL`)**: Comprehensive fundamental and technical blueprint (LTP ~₹395).
   * **Business Performance**: Revenue +43% YoY, PAT +26% in capital goods & pharma process machinery.
