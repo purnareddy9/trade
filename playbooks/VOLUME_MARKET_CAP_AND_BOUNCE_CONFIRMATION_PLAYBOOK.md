@@ -113,7 +113,7 @@ flowchart LR
 
 ## 4. Visual Candlestick Reversal Guide
 
-*(Refer to [`candlestick_bounce_guide.jpg`](./candlestick_bounce_guide.jpg) and [`candlestick_bounce_patterns.svg`](./candlestick_bounce_patterns.svg) in this repository for full graphical charts).*
+*(Refer to [`candlestick_bounce_guide.jpg`](../visualizers/candlestick_bounce_guide.jpg) and [`candlestick_bounce_patterns.svg`](../visualizers/candlestick_bounce_patterns.svg) in the `visualizers/` folder for full graphical charts).*
 
 ### Pattern 1: The Bullish Hammer (Pin Bar)
 * **Location:** At established horizontal support or the rising 200 EMA.
