@@ -25,6 +25,12 @@ A structured, institutional-grade equity analysis and swing trading operational 
     * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
     * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
 
+* **[`SETL_STOCK_DEEP_DIVE_RESEARCH.md`](./SETL_STOCK_DEEP_DIVE_RESEARCH.md)**:
+  * **Standard Engineering Technology (`SETL`)**: Comprehensive fundamental and technical blueprint (LTP ~₹395).
+  * **Business Performance**: Revenue +43% YoY, PAT +26% in capital goods & pharma process machinery.
+  * **Valuation Warning**: Trading at ~90x P/E, requiring strict risk management.
+  * **Two Actionable Setups**: 20 EMA pullback entry (₹378–₹384) vs. breakout entry (> ₹410) with targets at ₹445 and ₹475.
+
 * **[`YES_BANK_DEEP_DIVE_RESEARCH.md`](./YES_BANK_DEEP_DIVE_RESEARCH.md)**:
   * **Institutional Deep Dive on YESBANK**: Complete fundamental, technical, and legal analysis of your 3,000-share holding.
   * **The Supreme Court Shock (Oct 15, 2026)**: Why the ₹8,415 Cr AT-1 bond ruling turns reported profit into a potential -₹5,217 Cr net loss.
