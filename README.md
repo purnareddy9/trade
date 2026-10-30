@@ -111,6 +111,10 @@ A structured, institutional-grade equity analysis and swing trading operational 
 
 * **[`analyze.js`](./analyze.js)**: Node.js automation script parsing Zerodha holdings and tradebook CSV data to calculate invested capital, current value, sector weightage, and unrealized P&L.
 * **[`rebalance_calc.js`](./rebalance_calc.js)**: Node.js simulation script calculating capital unlocked (~₹2.35L) from restructuring recommendations.
+* **[`calc_persistent_6048.js`](./calc_persistent_6048.js)**: Audit script calculating exact missed recovery and capital comparison across your 4 exits with Persistent @ ₹6,048 closing LTP.
+* **[`calc_verified_ltp.js`](./calc_verified_ltp.js)**: Verification script tracking post-exit performance against live NSE/BSE closing quotes.
+* **[`calc_live_recovery.js`](./calc_live_recovery.js)**: Dynamic recovery calculator comparing realized cash vs. peak intraday highs and live market values.
+* **[`calc_recovery.js`](./calc_recovery.js)**: Core post-exit recovery mathematical model.
 
 ---
 
