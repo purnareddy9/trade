@@ -25,6 +25,13 @@ A structured, institutional-grade equity analysis and swing trading operational 
     * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
     * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
 
+* **[`EMA_20_50_200_COMPLETE_GUIDE.md`](./EMA_20_50_200_COMPLETE_GUIDE.md)**:
+  * **What EMA Is**: Mathematical weighting differences between SMA and EMA.
+  * **The 3 Pillars**: 20 EMA (Speedometer), 50 EMA (Compass), and 200 EMA (Border Wall).
+  * **The 3-EMA Alignment System**: Green light (Stage 2 Uptrend) vs. Red light (Stage 4 Downtrend).
+  * **Golden Cross vs. Death Cross**: Institutional algorithmic triggers.
+  * **Practical Tactics**: The 20 EMA trailing stop, 50 EMA institutional dip buying, and avoiding the resistance ceiling trap.
+
 * **[`analyze.js`](./analyze.js)**: Node.js automation script parsing Zerodha holdings and tradebook CSV data to calculate invested capital, current value, sector weightage, and unrealized P&L.
 * **[`rebalance_calc.js`](./rebalance_calc.js)**: Node.js simulation script calculating capital unlocked (~₹2.35L) from restructuring recommendations.
 
