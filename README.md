@@ -99,6 +99,10 @@ trade/
 ---
 
 ### 3. 📁 `research/` — Equity Research & Stock Blueprints
+* **[`research/MTF_EXPOSURE_AND_TELEGRAM_ANALYSIS.md`](./research/MTF_EXPOSURE_AND_TELEGRAM_ANALYSIS.md)**:
+  * **MTF Leverage Warning**: Why high Margin Trading Facility exposure in `Suzlon`, `JioFin`, and `Vodafone Idea` triggers forced liquidation cascades.
+  * **Social Media Scam Deconstruction**: How Telegram "Viksit Bharat / Multibagger" schemes lure retail traders with unlisted startups and penny traps.
+  * **17 Large-Cap Radar Audit**: Categorizing 17 blue chips into Tier 1 compounders, Tier 2 defensives, and Tier 3 cyclicals.
 * **[`research/BROKERAGE_RADAR_ANALYSIS.md`](./research/BROKERAGE_RADAR_ANALYSIS.md)**:
   * **Forensic Audit of 21 Brokerage High-Upside Picks**: Classifying recommendations into Institutional Compounders, Turnarounds, and Traps.
   * **Portfolio Direct Hits**: `Eternal` (Target ₹430), `Vodafone Idea` (Target ₹19), `Bharti Airtel` (Target ₹2,732).
