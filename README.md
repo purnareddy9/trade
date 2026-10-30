@@ -14,6 +14,17 @@ A structured, institutional-grade equity analysis and swing trading operational 
   * **14-Point Pre-Trade Checklist**: Mandatory pre-trade verification framework before placing orders.
   * **Daily Routine & 8-Week Roadmap**: Step-by-step daily schedule (Pre-Market, Live Market, Post-Market, Evening) and structured 8-week trader learning pathway.
 
+* **[`VOLUME_MARKET_CAP_AND_BOUNCE_CONFIRMATION_PLAYBOOK.md`](./VOLUME_MARKET_CAP_AND_BOUNCE_CONFIRMATION_PLAYBOOK.md)**:
+  * **What Volume Is**: The Fuel Principle, Lie Detector concept, and the 4 Volume-Price Quadrants.
+  * **The 3 Catastrophic Loss Traps**: Market Cap & Penny Stock lower circuit traps, the RSI < 30 "Oversold" fallacy, and the 50/200 EMA Death Cross resistance traps.
+  * **True Bounce vs. Dead-Cat Traps**: 3-step confirmation framework.
+  * **Visual Candlestick Guides**: [`candlestick_bounce_guide.jpg`](./candlestick_bounce_guide.jpg) & [`candlestick_bounce_patterns.svg`](./candlestick_bounce_patterns.svg).
+  * **4 Step-by-Step Trade Examples**:
+    * Bullish Hammer at 200 EMA (`ICICIBANK`)
+    * Bullish Engulfing with 2x Volume Spike (`SBIN`)
+    * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
+    * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
+
 * **[`analyze.js`](./analyze.js)**: Node.js automation script parsing Zerodha holdings and tradebook CSV data to calculate invested capital, current value, sector weightage, and unrealized P&L.
 * **[`rebalance_calc.js`](./rebalance_calc.js)**: Node.js simulation script calculating capital unlocked (~₹2.35L) from restructuring recommendations.
 
