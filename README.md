@@ -25,6 +25,14 @@ A structured, institutional-grade equity analysis and swing trading operational 
     * Morning Star Reversal at 50 EMA (`SUNPHARMA`)
     * Avoiding Dead-Cat False Traps (`SUZLON` Case Study)
 
+* **[`INTRADAY_HIGH_MOMENTUM_TRADING_GUIDE.md`](./INTRADAY_HIGH_MOMENTUM_TRADING_GUIDE.md)**:
+  * **Intraday vs. Swing**: Key structural differences (5m/15m timeframes, VWAP, 03:15 PM exit).
+  * **The Holy Trinity**: VWAP, 9 & 21 EMA on 5m, and Relative Volume (RVOL ≥ 2.0).
+  * **Morning Stock Selection**: 4-step morning scanner (08:45 – 09:15 AM) using sector strength, pre-open gaps, and catalysts.
+  * **Top 3 Strategies**: 15-Minute Opening Range Breakout (ORB), VWAP + 9 EMA Pullback, and Afternoon HOD Breakout.
+  * **Real Execution Walkthrough**: Step-by-step numbers on BSOFT intraday momentum trade.
+  * **The 5 Survival Rules**: Daily loss limit, maximum 3 trades, and terminal hard stop-loss.
+
 * **[`EMA_HOLDINGS_AUDIT_WHAT_TO_EXIT.md`](./EMA_HOLDINGS_AUDIT_WHAT_TO_EXIT.md)**:
   * **21-Stock EMA Audit**: Concrete 20, 50, and 200 EMA numbers for every holding in your portfolio.
   * **Clear Action Classification**:
