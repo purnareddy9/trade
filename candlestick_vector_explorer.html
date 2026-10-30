@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Candlestick Vector Explorer</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .candle-green { fill: #089981; stroke: #089981; }
+    .candle-red { fill: #F23645; stroke: #F23645; }
+    .wick-green { stroke: #089981; stroke-width: 2.5; stroke-linecap: round; }
+    .wick-red { stroke: #F23645; stroke-width: 2.5; stroke-linecap: round; }
+    .dash-line { stroke-dasharray: 4, 4; }
+  </style>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-4">
+
+  <div class="bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-2xl p-6 shadow-xl max-w-5xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between pb-5 border-b border-[var(--border)] gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-0.5 text-xs font-bold rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">VECTOR VISUALIZER</span>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight">Interactive Candlestick Bounce Explorer</h1>
+        </div>
+        <p class="text-sm text-[var(--muted-foreground)] mt-1">High-definition vector charts demonstrating institutional volume & bounce confirmation patterns.</p>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="flex flex-wrap gap-2 bg-[var(--background)] p-1.5 rounded-xl border border-[var(--border)] text-xs font-semibold">
+        <button onclick="switchTab('hammer')" id="btn-hammer" class="px-3 py-1.5 rounded-lg transition-all bg-emerald-600 text-white shadow-sm">1. Bullish Hammer</button>
+        <button onclick="switchTab('engulfing')" id="btn-engulfing" class="px-3 py-1.5 rounded-lg transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)]">2. Bullish Engulfing</button>
+        <button onclick="switchTab('morningstar')" id="btn-morningstar" class="px-3 py-1.5 rounded-lg transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)]">3. Morning Star</button>
+        <button onclick="switchTab('falsevsTrue')" id="btn-falsevsTrue" class="px-3 py-1.5 rounded-lg transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)]">4. True vs Fake Trap</button>
+      </div>
+    </div>
+
+    <!-- Active Chart Container -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-6 items-start">
+      
+      <!-- Vector Display Panel (Left / 7 cols) -->
+      <div class="lg:col-span-7 bg-[#131722] rounded-xl border border-[#2a2e39] p-4 flex flex-col items-center justify-center min-h-[420px] shadow-inner relative overflow-hidden">
+        
+        <!-- Tab 1: Hammer SVG -->
+        <div id="chart-hammer" class="w-full h-full flex flex-col items-center">
+          <svg viewBox="0 0 500 360" class="w-full h-[340px]">
+            <!-- Grid Lines -->
+            <line x1="40" y1="60" x2="460" y2="60" stroke="#1e222d" stroke-width="1"/>
+            <line x1="40" y1="140" x2="460" y2="140" stroke="#1e222d" stroke-width="1"/>
+            <line x1="40" y1="220" x2="460" y2="220" stroke="#1e222d" stroke-width="1"/>
+            <line x1="40" y1="300" x2="460" y2="300" stroke="#1e222d" stroke-width="1"/>
+
+            <!-- Support Zone -->
+            <rect x="40" y="270" width="420" height="24" fill="#2962FF" fill-opacity="0.12" rx="4"/>
+            <line x1="40" y1="282" x2="460" y2="282" stroke="#2962FF" stroke-width="1.5" class="dash-line"/>
+            <text x="50" y="278" fill="#2962FF" font-size="11" font-weight="700">KEY INSTITUTIONAL SUPPORT / 200 EMA</text>
+
+            <!-- Prior Bearish Candle -->
+            <line x1="140" y1="90" x2="140" y2="210" class="wick-red"/>
+            <rect x="125" y="110" width="30" height="70" class="candle-red" rx="2"/>
+
+            <!-- Hammer Candle -->
+            <!-- Long lower wick -->
+            <line x1="260" y1="120" x2="260" y2="295" class="wick-green" stroke-width="3"/>
+            <!-- Body -->
+            <rect x="245" y="125" width="30" height="30" class="candle-green" rx="2"/>
+
+            <!-- Entry Trigger Line -->
+            <line x1="240" y1="118" x2="380" y2="118" stroke="#089981" stroke-width="1.5" class="dash-line"/>
+            <circle cx="260" cy="118" r="4" fill="#089981"/>
+            <text x="290" y="112" fill="#089981" font-size="12" font-weight="700">BUY TRIGGER (Break of High)</text>
+
+            <!-- Lower Wick Dimension Bracket -->
+            <path d="M 285 155 L 295 155 L 295 295 L 285 295" fill="none" stroke="#787B86" stroke-width="1.5"/>
+            <text x="305" y="225" fill="#D1D4DC" font-size="11" font-weight="600">Lower Wick &gt; 2.5x Body</text>
+            <text x="305" y="240" fill="#787B86" font-size="10">(Rejection of lower prices)</text>
+
+            <!-- Stop Loss -->
+            <line x1="220" y1="302" x2="360" y2="302" stroke="#F23645" stroke-width="1.5" class="dash-line"/>
+            <circle cx="260" cy="302" r="4" fill="#F23645"/>
+            <text x="275" y="318" fill="#F23645" font-size="12" font-weight="700">STOP LOSS (0.5% below wick)</text>
+          </svg>
+        </div>
+
+        <!-- Tab 2: Bullish Engulfing SVG -->
+        <div id="chart-engulfing" class="w-full h-full flex flex-col items-center hidden">
+          <svg viewBox="0 0 500 360" class="w-full h-[340px]">
+            <!-- Support Line -->
+            <line x1="40" y1="280" x2="460" y2="280" stroke="#2962FF" stroke-width="1.5" class="dash-line"/>
+            <text x="50" y="274" fill="#2962FF" font-size="11" font-weight="700">DEMAND BASE CONSOLIDATION</text>
+
+            <!-- Day 1 Red Candle -->
+            <line x1="160" y1="130" x2="160" y2="240" class="wick-red"/>
+            <rect x="145" y="145" width="30" height="75" class="candle-red" rx="2"/>
+            <text x="135" y="260" fill="#787B86" font-size="11">Day 1 (Bearish)</text>
+
+            <!-- Day 2 Green Engulfing Candle -->
+            <line x1="250" y1="100" x2="250" y2="265" class="wick-green" stroke-width="3"/>
+            <rect x="232" y="115" width="36" height="135" class="candle-green" rx="2"/>
+            <text x="215" y="275" fill="#089981" font-size="12" font-weight="700">Day 2 (Full Engulf)</text>
+
+            <!-- Bracket Coverage -->
+            <path d="M 280 115 L 292 115 L 292 250 L 280 250" fill="none" stroke="#2962FF" stroke-width="2"/>
+            <text x="300" y="180" fill="#2962FF" font-size="12" font-weight="700">Total Body Coverage</text>
+            <text x="300" y="196" fill="#D1D4DC" font-size="11">100% Absorbs Prior Selling</text>
+
+            <!-- Volume Subplot -->
+            <rect x="145" y="295" width="30" height="35" fill="#F23645" opacity="0.6"/>
+            <rect x="235" y="285" width="30" height="55" fill="#089981"/>
+            <line x1="120" y1="300" x2="300" y2="300" stroke="#787B86" stroke-width="1" class="dash-line"/>
+            <text x="275" y="325" fill="#089981" font-size="11" font-weight="700">&gt; 2x Volume Spike</text>
+          </svg>
+        </div>
+
+        <!-- Tab 3: Morning Star SVG -->
+        <div id="chart-morningstar" class="w-full h-full flex flex-col items-center hidden">
+          <svg viewBox="0 0 500 360" class="w-full h-[340px]">
+            <!-- 50 EMA Support Curve -->
+            <path d="M 40 290 Q 250 280 460 250" fill="none" stroke="#FF9800" stroke-width="2"/>
+            <text x="50" y="310" fill="#FF9800" font-size="11" font-weight="700">RISING 50-DAY EMA SUPPORT</text>
+
+            <!-- Candle 1: Big Red -->
+            <line x1="130" y1="100" x2="130" y2="230" class="wick-red"/>
+            <rect x="115" y="115" width="30" height="95" class="candle-red" rx="2"/>
+            <text x="105" y="250" fill="#787B86" font-size="11">Day 1: Selloff</text>
+
+            <!-- Candle 2: Indecision Star -->
+            <line x1="220" y1="210" x2="220" y2="275" stroke="#D1D4DC" stroke-width="2"/>
+            <rect x="210" y="230" width="20" height="20" fill="#787B86" rx="2"/>
+            <text x="195" y="295" fill="#D1D4DC" font-size="11">Day 2: Star</text>
+
+            <!-- Candle 3: Powerful Green Expansion -->
+            <line x1="310" y1="110" x2="310" y2="245" class="wick-green" stroke-width="3"/>
+            <rect x="295" y="125" width="30" height="105" class="candle-green" rx="2"/>
+            <text x="285" y="265" fill="#089981" font-size="11" font-weight="700">Day 3: Surge</text>
+
+            <!-- 50% Threshold Line -->
+            <line x1="100" y1="162" x2="340" y2="162" stroke="#2962FF" stroke-width="1.5" class="dash-line"/>
+            <text x="345" y="166" fill="#2962FF" font-size="11" font-weight="700">&gt; 50% Penetration Line</text>
+          </svg>
+        </div>
+
+        <!-- Tab 4: True vs Fake Trap SVG -->
+        <div id="chart-falsevsTrue" class="w-full h-full flex flex-col items-center hidden">
+          <svg viewBox="0 0 500 360" class="w-full h-[340px]">
+            <!-- Split Divider -->
+            <line x1="250" y1="20" x2="250" y2="340" stroke="#2a2e39" stroke-width="1.5"/>
+
+            <!-- LEFT: False Dead-Cat Trap -->
+            <text x="45" y="45" fill="#F23645" font-size="13" font-weight="700">FALSE BOUNCE (TRAP ❌)</text>
+            <path d="M 30 110 Q 120 140 230 190" fill="none" stroke="#FF5252" stroke-width="2"/>
+            <text x="140" y="135" fill="#FF5252" font-size="10">Declining 20 EMA</text>
+
+            <!-- Rejection Candle with upper wick -->
+            <line x1="120" y1="120" x2="120" y2="215" stroke="#089981" stroke-width="2"/>
+            <rect x="110" y="150" width="20" height="35" class="candle-green"/>
+            <path d="M 120 120 L 170 100" fill="none" stroke="#F23645" stroke-width="1"/>
+            <text x="175" y="105" fill="#F23645" font-size="10" font-weight="700">Upper Wick Rejection!</text>
+
+            <text x="45" y="245" fill="#D1D4DC" font-size="10">• Low / Declining Volume</text>
+            <text x="45" y="262" fill="#D1D4DC" font-size="10">• Fails at downward 20 EMA</text>
+            <text x="45" y="279" fill="#F23645" font-size="10" font-weight="600">• Result: Dumps to fresh lows</text>
+
+            <!-- RIGHT: True Reversal -->
+            <text x="290" y="45" fill="#089981" font-size="13" font-weight="700">TRUE BOUNCE (VALID ✔)</text>
+            <path d="M 270 170 Q 360 160 470 140" fill="none" stroke="#2962FF" stroke-width="2"/>
+            <text x="390" y="130" fill="#2962FF" font-size="10">20 EMA Floor</text>
+
+            <!-- Solid Candle breaking out -->
+            <line x1="360" y1="100" x2="360" y2="210" class="wick-green" stroke-width="3"/>
+            <rect x="345" y="115" width="30" height="85" class="candle-green" rx="2"/>
+
+            <text x="290" y="245" fill="#D1D4DC" font-size="10">• Closes near daily high</text>
+            <text x="290" y="262" fill="#D1D4DC" font-size="10">• Slices decisively above 20 EMA</text>
+            <text x="290" y="279" fill="#089981" font-size="10" font-weight="600">• 2x Volume confirms Smart Money</text>
+          </svg>
+        </div>
+
+      </div>
+
+      <!-- Right Details & Live Calculator Panel (5 cols) -->
+      <div class="lg:col-span-5 flex flex-col gap-4">
+        
+        <!-- Strategy Guide Box -->
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-4">
+          <h3 id="panel-title" class="font-bold text-sm text-[var(--foreground)] flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Bullish Hammer Execution Rules
+          </h3>
+          <ul id="panel-rules" class="text-xs text-[var(--muted-foreground)] mt-2.5 space-y-2">
+            <li class="flex items-start gap-1.5"><span class="text-emerald-500 font-bold">✔</span> <span><strong>Rejection:</strong> Lower shadow must be &ge; 2x the body height.</span></li>
+            <li class="flex items-start gap-1.5"><span class="text-emerald-500 font-bold">✔</span> <span><strong>Trigger:</strong> Enter only on candle high breakout.</span></li>
+            <li class="flex items-start gap-1.5"><span class="text-emerald-500 font-bold">✔</span> <span><strong>Stop-Loss:</strong> Placed 0.5% below the lower wick tip.</span></li>
+          </ul>
+        </div>
+
+        <!-- Interactive 1% Risk & Position Sizing Calculator -->
+        <div class="bg-[var(--background)] border border-[var(--border)] rounded-xl p-4">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-[var(--muted-foreground)] mb-3">Live Swing Sizing Calculator</h4>
+          
+          <div class="grid grid-cols-2 gap-3 text-xs mb-3">
+            <div>
+              <label class="text-[var(--muted-foreground)] block mb-1">Capital (₹)</label>
+              <input id="calc-cap" type="number" value="1000000" oninput="runCalculator()" class="w-full bg-[var(--card)] border border-[var(--border)] rounded-lg px-2.5 py-1.5 text-[var(--foreground)] font-mono">
+            </div>
+            <div>
+              <label class="text-[var(--muted-foreground)] block mb-1">Risk %</label>
+              <input id="calc-risk-pct" type="number" value="1.0" step="0.25" oninput="runCalculator()" class="w-full bg-[var(--card)] border border-[var(--border)] rounded-lg px-2.5 py-1.5 text-[var(--foreground)] font-mono">
+            </div>
+            <div>
+              <label class="text-[var(--muted-foreground)] block mb-1">Entry Price (₹)</label>
+              <input id="calc-entry" type="number" value="1253" oninput="runCalculator()" class="w-full bg-[var(--card)] border border-[var(--border)] rounded-lg px-2.5 py-1.5 text-[var(--foreground)] font-mono">
+            </div>
+            <div>
+              <label class="text-[var(--muted-foreground)] block mb-1">Stop-Loss (₹)</label>
+              <input id="calc-sl" type="number" value="1225" oninput="runCalculator()" class="w-full bg-[var(--card)] border border-[var(--border)] rounded-lg px-2.5 py-1.5 text-[var(--foreground)] font-mono">
+            </div>
+          </div>
+
+          <!-- Dynamic Output Card -->
+          <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 text-xs font-mono space-y-1.5">
+            <div class="flex justify-between"><span class="text-[var(--muted-foreground)]">Max Loss Allowed:</span><span id="out-maxrisk" class="font-bold text-red-400">₹10,000</span></div>
+            <div class="flex justify-between"><span class="text-[var(--muted-foreground)]">Shares to Buy:</span><span id="out-qty" class="font-bold text-emerald-400">357 shares</span></div>
+            <div class="flex justify-between"><span class="text-[var(--muted-foreground)]">Total Investment:</span><span id="out-inv" class="font-bold text-[var(--foreground)]">₹4,47,321</span></div>
+            <div class="border-t border-[var(--border)] my-1"></div>
+            <div class="flex justify-between"><span class="text-[var(--muted-foreground)]">Target 1 (1:2 R:R):</span><span id="out-t1" class="font-bold text-emerald-400">₹1,309 (+₹10k)</span></div>
+            <div class="flex justify-between"><span class="text-[var(--muted-foreground)]">Target 2 (1:3.5 R:R):</span><span id="out-t2" class="font-bold text-emerald-400">₹1,351 (+₹17.5k)</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      hammer: {
+        title: "Bullish Hammer Execution Rules",
+        rules: [
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>Rejection:</strong> Lower shadow must be &ge; 2.5x body height, proving buyers aggressively pushed back.</span>",
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>Trigger:</strong> Enter long strictly when the subsequent candle breaks the Hammer's high.</span>",
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>Stop-Loss:</strong> Placed 0.5% below the lower wick tip. Protects capital against breakdown.</span>"
+        ],
+        entry: 1253, sl: 1225
+      },
+      engulfing: {
+        title: "Bullish Engulfing Execution Rules",
+        rules: [
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>Absorption:</strong> Green body must completely swallow/engulf prior day's red body.</span>",
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>Volume Footprint:</strong> Day 2 volume must be &ge; 1.5x - 2x higher than Day 1 volume.</span>",
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>Stop-Loss:</strong> Placed below the base of the green engulfing candle.</span>"
+        ],
+        entry: 966, sl: 938
+      },
+      morningstar: {
+        title: "Morning Star Execution Rules",
+        rules: [
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>3-Day Cycle:</strong> Day 1 red drop, Day 2 indecision star, Day 3 powerful green expansion.</span>",
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>Midpoint Rule:</strong> Day 3 must close &gt; 50% deep into Day 1's red candle body.</span>",
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>Stop-Loss:</strong> Placed 0.5% below the low of the Day 2 star candle.</span>"
+        ],
+        entry: 1818, sl: 1745
+      },
+      falsevsTrue: {
+        title: "True Bounce vs Dead-Cat Trap",
+        rules: [
+          "<span class='text-red-400 font-bold'>✖</span> <span><strong>Dead-Cat:</strong> Long upper wick, low volume, rejected at downward-sloping 20 EMA. Never buy!</span>",
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>True Bounce:</strong> Closes near high, slices above 20 EMA, backed by &ge; 2x volume surge.</span>",
+          "<span class='text-emerald-500 font-bold'>✔</span> <span><strong>Follow-Through:</strong> Wait for Day 2 to confirm high break before taking exposure.</span>"
+        ],
+        entry: 1965, sl: 1895
+      }
+    };
+
+    function switchTab(tab) {
+      ['hammer', 'engulfing', 'morningstar', 'falsevsTrue'].forEach(t => {
+        document.getElementById('chart-' + t).classList.add('hidden');
+        document.getElementById('btn-' + t).className = 'px-3 py-1.5 rounded-lg transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)]';
+      });
+
+      document.getElementById('chart-' + tab).classList.remove('hidden');
+      document.getElementById('btn-' + tab).className = 'px-3 py-1.5 rounded-lg transition-all bg-emerald-600 text-white shadow-sm';
+
+      document.getElementById('panel-title').innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500"></span> ' + data[tab].title;
+      document.getElementById('panel-rules').innerHTML = data[tab].rules.map(r => `<li class="flex items-start gap-1.5">${r}</li>`).join('');
+
+      document.getElementById('calc-entry').value = data[tab].entry;
+      document.getElementById('calc-sl').value = data[tab].sl;
+      runCalculator();
+    }
+
+    function runCalculator() {
+      const cap = parseFloat(document.getElementById('calc-cap').value) || 0;
+      const riskPct = parseFloat(document.getElementById('calc-risk-pct').value) || 0;
+      const entry = parseFloat(document.getElementById('calc-entry').value) || 0;
+      const sl = parseFloat(document.getElementById('calc-sl').value) || 0;
+
+      const maxRisk = cap * (riskPct / 100);
+      const riskPerShare = Math.max(0.1, entry - sl);
+      const qty = Math.floor(maxRisk / riskPerShare);
+      const totalInv = qty * entry;
+
+      const t1 = entry + (2 * riskPerShare);
+      const t2 = entry + (3.5 * riskPerShare);
+
+      document.getElementById('out-maxrisk').innerText = '₹' + maxRisk.toLocaleString('en-IN');
+      document.getElementById('out-qty').innerText = qty.toLocaleString('en-IN') + ' shares';
+      document.getElementById('out-inv').innerText = '₹' + totalInv.toLocaleString('en-IN');
+      document.getElementById('out-t1').innerText = '₹' + t1.toFixed(1) + ' (+₹' + Math.round(qty * 0.5 * 2 * riskPerShare).toLocaleString('en-IN') + ')';
+      document.getElementById('out-t2').innerText = '₹' + t2.toFixed(1) + ' (+₹' + Math.round(qty * 0.5 * 3.5 * riskPerShare).toLocaleString('en-IN') + ')';
+    }
+
+    runCalculator();
+  </script>
+</body>
+</html>
