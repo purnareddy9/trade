@@ -51,6 +51,8 @@ trade/
 ## 📌 Master File Index & Descriptions
 
 ### 1. 📁 `playbooks/` — Portfolio Allocation & Playbooks
+* **[`playbooks/COMPLETE_MARKET_CMP_AND_ACTION_GUIDE.md`](./playbooks/COMPLETE_MARKET_CMP_AND_ACTION_GUIDE.md)**:
+  * **Master CMP & Action Guide for All 25 Shared Stocks**: Verified live NSE market prices, institutional ratings (Tier 1 Elite, Tier 2 Defensive, Tier 3 Cyclical), accumulation zones, stop-losses, and profit targets.
 * **[`playbooks/MONDAY_EXECUTION_TRADE_PLAN.md`](./playbooks/MONDAY_EXECUTION_TRADE_PLAN.md)**:
   * **Monday Chronological Battle Plan**: Detailed minute-by-minute execution schedule (08:45 AM to 03:30 PM).
   * **Exact Sell Orders**: 8 toxic penny stocks to market-sell (salvaging ₹87,141), profit booking on `IDEA` and `UJJIVANSFB` (+₹18,532), expanding liquid cash to **~₹7.16 Lakhs**.
